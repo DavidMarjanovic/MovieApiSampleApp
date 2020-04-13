@@ -9,9 +9,7 @@
 import Foundation
 import UIKit
 
-class CellClass: UITableViewCell {
-    
-    
+class MovieListCell: UITableViewCell {
     
     let titleText: UILabel = {
         let title = UILabel()
@@ -37,7 +35,7 @@ class CellClass: UITableViewCell {
         return title
     }()
     
-    let genreText: UILabel = {
+    let genreLabel: UILabel = {
         let title = UILabel()
         title.translatesAutoresizingMaskIntoConstraints = false
         title.font = UIFont(name: "Quicksand-Regular", size: 15)
@@ -115,7 +113,7 @@ class CellClass: UITableViewCell {
         contentView.addSubview(container)
         container.addSubview(titleText)
         container.addSubview(movieImage)
-        container.addSubview(genreText)
+        container.addSubview(genreLabel)
         container.addSubview(starImage)
         container.addSubview(otherStarImage)
         
@@ -152,36 +150,31 @@ class CellClass: UITableViewCell {
         titleText.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -15).isActive = true
         titleText.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -118).isActive = true
         
-        genreText.topAnchor.constraint(equalTo: titleText.bottomAnchor).isActive = true
-        genreText.leadingAnchor.constraint(equalTo: movieImage.trailingAnchor, constant: 15).isActive = true
-        genreText.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -15).isActive = true
-        genreText.bottomAnchor.constraint(equalTo: starImage.topAnchor, constant: -20).isActive = true
-        
-        
-        
-        
-        
-        
+        genreLabel.topAnchor.constraint(equalTo: titleText.bottomAnchor).isActive = true
+        genreLabel.leadingAnchor.constraint(equalTo: movieImage.trailingAnchor, constant: 15).isActive = true
+        genreLabel.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -15).isActive = true
+        genreLabel.bottomAnchor.constraint(equalTo: starImage.topAnchor, constant: -20).isActive = true
     }
+    
     var grey = UIColor(red: 56.0/255.0, green: 56.0/255.0, blue: 56.0/255.0, alpha: 1.0)
     
-    func configureCell(movie: Movie, color: UIColor){
+    func configureCell(movie: MovieListView, color: UIColor){
         layer.borderWidth = 8
         layer.borderColor = grey.cgColor
         layer.cornerRadius = 20
         backgroundColor = UIColor(red: 0.221, green: 0.221, blue: 0.221, alpha: 1)
         selectionStyle = .none
-        movieImage.image = movie.image
+        movieImage.downloaded(from: "https://image.tmdb.org/t/p/w1280\(movie.imageURL)", contentMode: .scaleToFill)
         titleText.text = movie.title
-        genreText.text = movie.genre
-        
+        var genreText = ""
+        for (index, genre) in movie.genres.enumerated(){
+            if index == 0{
+                genreText = genreText + genre
+            }else{
+                genreText = genreText + ", \(genre)"
+            }
+            
+        }
+        genreLabel.text = genreText
     }
-}
-
-struct Movie{
-    let title: String
-    let genre: String
-    let image: UIImage
-    let director: String
-    let description: String
 }

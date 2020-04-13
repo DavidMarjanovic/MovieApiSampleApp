@@ -16,8 +16,9 @@ struct MovieListView {
     let year: String
     let watched: Bool
     let favorite: Bool
+    let genres: [String]
     
-    init(id: Int, title: String, description: String, imageURL: String, year: String, watched: Bool, favorite: Bool){
+    init(id: Int, title: String, description: String, imageURL: String, year: String, watched: Bool, favorite: Bool, genres: [String]){
         self.id = id
         self.title = title
         self.description = description
@@ -25,5 +26,6 @@ struct MovieListView {
         self.year = year
         self.watched = watched
         self.favorite = favorite
+        self.genres = genres
     }
 }

@@ -21,6 +21,21 @@ class NetworkManager{
                 completed(nil)
                 return
             }
-        }
+            let movieList: Response<[MovieList]>? = SerilizationManager.parseData(jsonData: safeData)
+            completed(movieList?.results)
+        }.resume()
+    }
+    
+    func getGenres(from url: String, _ completed: @escaping (MovieGenres?) -> Void) {
+        guard let safeUrl = URL(string: url + apiKey) else {return}
+        URLSession.shared.dataTask(with: safeUrl){data, urlResponse, error in
+            guard let safeData = data, error == nil, urlResponse != nil else {
+                #warning("HANDLATI ERROR")
+                completed(nil)
+                return
+            }
+            let movieList: MovieGenres? = SerilizationManager.parseData(jsonData: safeData)
+            completed(movieList)
+        }.resume()
     }
 }

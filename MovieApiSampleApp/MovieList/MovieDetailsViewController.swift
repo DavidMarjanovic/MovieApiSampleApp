@@ -10,21 +10,15 @@ import Foundation
 import UIKit
 
 
-class descriptionScreen: UIViewController, UITableViewDelegate, UITableViewDataSource, BackButtonDelegate {
+class MovieDetailsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, BackButtonDelegate {
     func popViewController() {
         self.navigationController?.popViewController(animated: true)
     }
     
-    
-    
     var screenData = [MovieCellItem]()
-    
-    
-    
-    
-    
-    let movie: Movie
-    init(movie: Movie) {
+
+    let movie: MovieListView
+    init(movie: MovieListView) {
         self.movie = movie
         super.init(nibName: nil, bundle: nil)
     }
@@ -34,15 +28,15 @@ class descriptionScreen: UIViewController, UITableViewDelegate, UITableViewDataS
     }
     
     
-    func createScreenData(movie: Movie) -> [MovieCellItem] {
+    func createScreenData(movie: MovieListView) -> [MovieCellItem] {
         
         var screenData: [MovieCellItem] = []
-        
-        screenData.append(MovieCellItem(type: .image, data: movie.image))
-        screenData.append(MovieCellItem(type: .title, data: movie.title))
-        screenData.append(MovieCellItem(type: .genre, data: movie.genre))
-        screenData.append(MovieCellItem(type: .director, data: movie.director))
-        screenData.append(MovieCellItem(type: .description, data: movie.description))
+        #warning("Kasnije prepraviti s novim modelima")
+//        screenData.append(MovieCellItem(type: .image, data: movie.image))
+//        screenData.append(MovieCellItem(type: .title, data: movie.title))
+//        screenData.append(MovieCellItem(type: .genre, data: movie.genre))
+//        screenData.append(MovieCellItem(type: .director, data: movie.director))
+//        screenData.append(MovieCellItem(type: .description, data: movie.description))
         
         return screenData
     }
@@ -108,7 +102,6 @@ class descriptionScreen: UIViewController, UITableViewDelegate, UITableViewDataS
             cell.configureCell(text: safeData)
             return cell
         }
-            return UITableViewCell()
     }
     
     
