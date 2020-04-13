@@ -13,7 +13,7 @@ public struct MovieList: Codable{
     let overview: String
     let releaseDate: String
     let genreIds: [Int]
-    let OriginalTitle: String
+    let originalTitle: String
     let originalLanguage: String
     let posterPath: String
     let title: String
