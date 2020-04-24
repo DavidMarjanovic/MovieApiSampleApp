@@ -9,13 +9,9 @@
 import Foundation
 import UIKit
 
-
-
-
-
 class GenreCell: UITableViewCell {
     
-    let genreText: UILabel = {
+    let genreLabel: UILabel = {
         let title = UILabel()
         title.translatesAutoresizingMaskIntoConstraints = false
         title.font = UIFont.systemFont(ofSize: 21, weight: .regular)
@@ -24,50 +20,46 @@ class GenreCell: UITableViewCell {
         title.lineBreakMode = .byWordWrapping
         return title
     }()
-
-
-    func configureCell(text: String){
+    
+    func configureCell(text: [String]){
         layer.cornerRadius = 20
         backgroundColor = UIColor(red: 0.11, green: 0.11, blue: 0.118, alpha: 1)
         selectionStyle = .none
-        genreText.text = text
+        var genreText = ""
+        for (index, genre) in text.enumerated(){
+            if index == 0{
+                genreText = genreText + genre
+            }else{
+                genreText = genreText + ", \(genre)"
+            }
+        }
+        genreLabel.text = genreText
     }
-    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
         layoutSubviews()
-        
-        
     }
     
     func setupUI(){
-        
-        contentView.addSubview(genreText)
-      
-        
-        
-        setupLayout()
+        contentView.addSubview(genreLabel)
+        setupConstraints()
     }
     
-    func setupLayout(){
+    func setupConstraints(){
         
-        genreText.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-        genreText.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 25).isActive = true
-        genreText.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -25).isActive = true
-        genreText.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor).isActive = true
-        genreText.heightAnchor.constraint(equalToConstant: 26).isActive = true
-        
-        
-        
-        
+        genreLabel.snp.makeConstraints{(maker) in
+            maker.top.bottom.equalToSuperview()
+            maker.leadingMargin.equalTo(15)
+            maker.trailingMargin.equalTo(-15)
+            maker.height.equalTo(30)
+        }
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
 }
 

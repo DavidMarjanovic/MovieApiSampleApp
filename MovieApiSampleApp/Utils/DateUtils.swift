@@ -22,5 +22,4 @@ class DateUtils{
         let calendar = Calendar.current
         return String(calendar.component(.year, from: safeDate))
     }
-    
 }

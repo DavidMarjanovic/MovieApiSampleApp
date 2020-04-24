@@ -1,5 +1,5 @@
 //
-//  MovieDetails.swift
+//  MovieGenres.swift
 //  MovieApiSampleApp
 //
 //  Created by David Marjanović on 13/04/2020.
@@ -8,12 +8,12 @@
 
 import Foundation
 
-struct MovieDetails: Codable{
-    let backdropPath: String
+
+struct MovieGenres: Codable{
     let genres: [Genre]
-    let id: Int
-    let title: String
-    let overView: String
-    let posterPath: String
 }
 
+struct Genre: Codable{
+    let id: Int
+    let name: String
+}

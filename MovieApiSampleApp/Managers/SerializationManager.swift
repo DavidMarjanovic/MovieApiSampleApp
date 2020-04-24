@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class SerilizationManager{
+public class SerializationManager{
     
     static let jsonDecoder: JSONDecoder = {
         let decoder = JSONDecoder()
